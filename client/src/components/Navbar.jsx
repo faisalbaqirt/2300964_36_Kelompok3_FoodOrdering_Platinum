@@ -1,47 +1,87 @@
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 function Navbar() {
+  const [isOn, setIsOn] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const navHeight = window.innerHeight - 600;
+      if (window.scrollY > navHeight && !isOn) {
+        setIsOn(true);
+      } else if (window.scrollY <= navHeight && isOn) {
+        setIsOn(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isOn]);
+
+  const isOrderPage = location.pathname === "/order";
+
   return (
-    <nav id="navigation" className="navbar navbar-default navbar-fixed-top">
+    <nav
+      id="navigation"
+      className={`navbar fixed-top navbar-expand-md ${isOn ? "on" : ""}`}
+    >
       <div className="container">
-        <div className="navbar-header">
-          <button
-            type="button"
-            className="navbar-toggle collapsed"
-            data-toggle="collapse"
-            data-target="#bs-example-navbar-collapse-1"
-          >
-            <span className="sr-only">Toggle navigation</span>
-            <span className="icon-bar"></span>{" "}
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-          </button>
-        </div>
-        <div
-          className="collapse navbar-collapse"
-          id="bs-example-navbar-collapse-1"
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          <ul className="nav navbar-nav">
-            <li>
-              <a href="#header" className="page-scroll">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div
+          className="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                href={isOrderPage ? "/#header" : "#header"}
+              >
                 Home
               </a>
             </li>
-            <li>
-              <a href="#products" className="page-scroll">
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                href={isOrderPage ? "/#products" : "#products"}
+              >
                 Menu
               </a>
             </li>
-            <li>
-              <a href="/order#order">Order</a>
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                href={isOrderPage ? "#order" : "/order#order"}
+              >
+                Order
+              </a>
             </li>
-            <li>
-              <a href="#contact" className="page-scroll">
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                href={isOrderPage ? "/#contact" : "#contact"}
+              >
                 Contact
               </a>
             </li>
-            <button type="button" class="btn btn-secondary">
+            <button type="button" className="btn btn-secondary">
               Sign Up
             </button>
-            <button type="button" class="btn btn-light">
+            <button type="button" className="btn btn-light">
               Login
             </button>
           </ul>
