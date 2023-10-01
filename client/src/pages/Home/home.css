@@ -2,7 +2,6 @@ body, html{
 	font-family: 'Open Sans', serif;
 	text-rendering: optimizeLegibility !important;
 	-webkit-font-smoothing: antialiased !important;
-	color: #777;
 	font-weight: 400;
 	width: 100% !important;
 	height: 100% !important;
@@ -37,29 +36,22 @@ h3{
 }
 p{
 	font-size: 15px;
+	color: #777;
 }
 ul{
 	list-style: none;
 	padding: 0;
 }
-/* Navigation */
-.navbar .navbar-nav{
-	display: inline-block;
-	float: none;
-	vertical-align: top;
-}
-.navbar .navbar-collapse{
-	text-align: center;
-}
+
+/* navigation */
 #navigation{
-	padding: 20px;
+    padding: 20px;
 	transition: all 0.8s;
 }
-#navigation.navbar-default{
-	background-color: rgba(248, 248, 248, 0);
-	border-color: rgba(231, 231, 231, 0);
+.navbar .navbar-collapse {
+	text-align: center;
 }
-#navigation.navbar-default .navbar-nav > li > a {
+#navigation .navbar-nav li a {
 	text-transform: uppercase;
 	color: #eee;
 	font-weight: 400;
@@ -69,7 +61,7 @@ ul{
 	letter-spacing: 0.5px;
 	margin: 0 40px 0 40px;
 }
-#navigation.navbar-default .navbar-nav > li > a:hover {
+#navigation .navbar-nav li a:hover {
 	color: #d43031;
 }
 .on {
@@ -77,34 +69,29 @@ ul{
 	padding: 0 !important;
 	padding: 10px 0 !important;
 }
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+.navbar .nav-item .nav-link.active {
 	color: #d43031 !important;
 	background-color: transparent;
 }
-.navbar-toggle {
-	border-radius: 0;
-}
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+#navigation .navbar-toggler:hover {
 	background-color: #d43031;
-	border-color: #d43031;
 }
-.navbar-default .navbar-toggle .icon-bar {
-	background-color: #FFF;
+.navbar-toggler {
+	border-radius: 0;
+	border-color: #FFF !important;
+	color: transparent;
+} 
+.navbar-toggler-icon {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
-.navbar-default .navbar-toggle:hover>.icon-bar {
-	background-color: #FFF;
-}
+
 /* header */
 .intro {
 	display: table;
 	width: 100%;
 	padding: 0;
 	background: url(../../../public/bgayamgeprek.jpg) center center no-repeat;
-	background-color: #e5e5e5;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
 	background-size: cover;
-	-o-background-size: cover;
 }
 .intro .overlay {
 	background: rgba(0,0,0,0.4);
@@ -137,8 +124,6 @@ header .intro-text {
 .card{
 	background-color: #333;
     border: none; 
-	border-radius: 10px;
-    margin-bottom: 20px;
 	margin: 0 auto;
 	width: 100%;
 	max-width: 300px;
@@ -152,14 +137,21 @@ header .intro-text {
 .card-img-top{
 	width: 100%;
 	height: 200px;
-	border-radius: 10px 10px 0 0;
 	object-fit: cover;
+	margin: 0;
+	padding: 0;
 }
 .card-body{
 	padding: 20px;
+	min-height: 220px;
 }
 .card-title{
 	color: #aaa;
+	text-align: center;
+	text-transform: uppercase;
+}
+.card-text {
+	padding-top: 15px;
 }
 .order-link{
 	margin: 0 auto;
@@ -174,6 +166,7 @@ header .intro-text {
 	font-weight: bold;
 	font-family: 'Raleway', sans-serif;
 	text-transform: uppercase;
+	text-decoration: none;
 	cursor: pointer;
 	align-items: center;
   }
