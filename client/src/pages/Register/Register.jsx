@@ -3,7 +3,8 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Scrollspy from "../../utils/Scrollspy";
 import { useEffect } from "react";
-import "../Home/home.css";
+import "./register.css";
+
 function Register() {
   useEffect(() => {
     const scrollspy = Scrollspy();
@@ -12,12 +13,12 @@ function Register() {
     };
   }, []);
   return (
-    <div>
+    <div className="register">
       <Navbar />
-      <div className="container my-5 ">
-        <h2 className="text-center">Register</h2>
+      <div className="container ">
+        <h2 className="text-center">Sign Up</h2>
         <form>
-          <div class="mb-3 ">
+          <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">
               Email address
             </label>
@@ -47,7 +48,7 @@ function Register() {
               id="exampleInputPassword1"
             />
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn">
             Sign Up
           </button>
         </form>

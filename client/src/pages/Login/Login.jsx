@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Scrollspy from "../../utils/Scrollspy";
 import { useEffect } from "react";
-
+import "./login.css";
 function Login() {
   useEffect(() => {
     const scrollspy = Scrollspy();
@@ -13,7 +13,7 @@ function Login() {
   }, []);
 
   return (
-    <div>
+    <div className="login">
       <Navbar />
       <div className="container">
         <h2 className="text-center">Login</h2>

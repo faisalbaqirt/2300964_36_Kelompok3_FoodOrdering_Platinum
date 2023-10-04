@@ -80,7 +80,7 @@ function Navbar() {
             </li>
             <div className="btnContainer">
               <a className="btn " href="/register">
-                Register
+                Sign Up
               </a>
               <a className="btn " href="/login">
                 Login

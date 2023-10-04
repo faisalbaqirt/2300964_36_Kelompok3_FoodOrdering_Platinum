@@ -1,0 +1,18 @@
+.register {
+  background: #777;
+  overflow: hidden;
+  color: #fff;
+}
+
+.register .btn {
+  background-color: #1a1a1a;
+  color: #fff;
+  border: none;
+}
+
+.register .container {
+  margin-bottom: 2rem;
+}
+.register .container h2 {
+  margin-top: 6rem;
+}

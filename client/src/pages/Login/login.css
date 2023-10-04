@@ -1,0 +1,18 @@
+.login {
+  background: #777;
+  overflow: hidden;
+  color: #fff;
+}
+
+.login .btn {
+  background-color: #1a1a1a;
+  color: #fff;
+  border: none;
+}
+
+.login .container {
+  margin-bottom: 2rem;
+}
+.login .container h2 {
+  margin-top: 6rem;
+}
