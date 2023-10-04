@@ -3,36 +3,22 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Scrollspy from "../../utils/Scrollspy";
 import { useEffect } from "react";
-import "./register.css";
-
-function Register() {
+import "./login.css";
+function Login() {
   useEffect(() => {
     const scrollspy = Scrollspy();
     return () => {
       scrollspy.dispose();
     };
   }, []);
+
   return (
-    <div className="register">
+    <div className="login">
       <Navbar />
-      <div className="container ">
-        <h2 className="text-center">Sign Up</h2>
+      <div className="container">
+        <h2 className="text-center">Login</h2>
         <form>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">
-              Email address
-            </label>
-            <input
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-            <div id="emailHelp" class="form-text">
-              We'll never share your email with anyone else.
-            </div>
-          </div>
-          <div class="mb-3 ">
             <label for="exampleInputEmail1" class="form-label">
               Username
             </label>
@@ -48,8 +34,8 @@ function Register() {
               id="exampleInputPassword1"
             />
           </div>
-          <button type="submit" class="btn">
-            Sign Up
+          <button type="submit" class="btn btn-primary">
+            Login
           </button>
         </form>
       </div>
@@ -60,4 +46,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;

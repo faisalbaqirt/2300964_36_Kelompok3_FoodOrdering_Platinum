@@ -1,237 +1,246 @@
-body, html{
-	font-family: 'Open Sans', serif;
-	text-rendering: optimizeLegibility !important;
-	-webkit-font-smoothing: antialiased !important;
-	font-weight: 400;
-	width: 100% !important;
-	height: 100% !important;
+body,
+html {
+  font-family: "Open Sans", serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-weight: 400;
+  width: 100% !important;
+  height: 100% !important;
 }
-h1, h2, h3{
-	font-family: 'Raleway', sans-serif;
+h1,
+h2,
+h3 {
+  font-family: "Raleway", sans-serif;
 }
-h2{
-	font-weight: 400;
-	font-size: 38px;
-	color: #333;
-	text-transform: uppercase;
-	position: relative;
-	margin-top: 10px;
-	margin-bottom: 15px;
-	padding-bottom: 20px;
+h2 {
+  font-weight: 400;
+  font-size: 38px;
+  color: #333;
+  text-transform: uppercase;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 20px;
 }
-h2::after{
-	position: absolute;
-	content: "";
-	background: #d43031;
-	height: 2px;
-	width: 70px;
-	bottom: 0;
-	margin-left: -35px;
-	left: 50%;
+h2::after {
+  position: absolute;
+  content: "";
+  background: #d43031;
+  height: 2px;
+  width: 70px;
+  bottom: 0;
+  margin-left: -35px;
+  left: 50%;
 }
-h3{
-	font-size: 24px;
-	font-weight: 400;
-	color: #333;
+h3 {
+  font-size: 24px;
+  font-weight: 400;
+  color: #333;
 }
-p{
-	font-size: 15px;
-	color: #777;
+p {
+  font-size: 15px;
+  color: #777;
 }
-ul{
-	list-style: none;
-	padding: 0;
+ul {
+  list-style: none;
+  padding: 0;
 }
 
 /* navigation */
-#navigation{
-    padding: 20px;
-	transition: all 0.8s;
+#navigation {
+  padding: 20px;
+  transition: all 0.8s;
 }
 .navbar .navbar-collapse {
-	text-align: center;
+  text-align: center;
 }
 #navigation .navbar-nav li a {
-	text-transform: uppercase;
-	color: #eee;
-	font-weight: 400;
-	font-size: 15px;
-	padding: 5px 0;
-	border: 2px solid transparent;
-	letter-spacing: 0.5px;
-	margin: 0 40px 0 40px;
+  text-transform: uppercase;
+  color: #eee;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 5px 0;
+  border: 2px solid transparent;
+  letter-spacing: 0.5px;
+  margin: 0 40px 0 40px;
 }
 #navigation .navbar-nav li a:hover {
-	color: #d43031;
+  color: #d43031;
 }
 .on {
-	background-color: #262626 !important;
-	padding: 0 !important;
-	padding: 10px 0 !important;
+  background-color: #262626 !important;
+  padding: 0 !important;
+  padding: 10px 0 !important;
 }
 .navbar .nav-item .nav-link.active {
-	color: #d43031 !important;
-	background-color: transparent;
+  color: #d43031 !important;
+  background-color: transparent;
 }
 #navigation .navbar-toggler:hover {
-	background-color: #d43031;
+  background-color: #d43031;
 }
 .navbar-toggler {
-	border-radius: 0;
-	border-color: #FFF !important;
-	color: transparent;
-} 
+  border-radius: 0;
+  border-color: #fff !important;
+  color: transparent;
+}
 .navbar-toggler-icon {
-	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
+.btnContainer .btn {
+  background-color: #1a1a1a;
+  color: #fff;
+  border-color: #fff;
+  margin-right: 4px;
+}
 /* header */
 .intro {
-	display: table;
-	width: 100%;
-	padding: 0;
-	background: url(../../../public/bgayamgeprek.jpg) center center no-repeat;
-	background-size: cover;
+  display: table;
+  width: 100%;
+  padding: 0;
+  background: url(../../../public/bgayamgeprek.jpg) center center no-repeat;
+  background-size: cover;
 }
 .intro .overlay {
-	background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
 }
 .intro h1 {
-	font-family: 'Rochester', cursive;
-	color: #fff;
-	font-size: 10em;
-	font-weight: 400;
-	margin-top: 0;
+  font-family: "Rochester", cursive;
+  color: #fff;
+  font-size: 10em;
+  font-weight: 400;
+  margin-top: 0;
 }
 .intro p {
-	color: #fff;
-	font-size: 24px;
-	font-weight: 400;
-	margin-top: 150px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400;
+  margin-top: 150px;
 }
 header .intro-text {
-	padding-top: 200px;
-	padding-bottom: 50px;
-	text-align: center;
+  padding-top: 200px;
+  padding-bottom: 50px;
+  text-align: center;
 }
 /* menu */
 #products {
-	padding: 50px 0;
+  padding: 50px 0;
 }
-#products h2{
-	text-align: center;
+#products h2 {
+  text-align: center;
 }
-.card{
-	background-color: #333;
-    border: none; 
-	margin: 0 auto;
-	width: 100%;
-	max-width: 300px;
-	align-items: center;
-    transition: transform 0.3s ease-in-out;
-	box-shadow: 0 -1px 30px 1px black;
-  }
-.card:hover{
-    transform: scale(1.05); 
+.card {
+  background-color: #333;
+  border: none;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 300px;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 -1px 30px 1px black;
 }
-.card-img-top{
-	width: 100%;
-	height: 200px;
-	object-fit: cover;
-	margin: 0;
-	padding: 0;
+.card:hover {
+  transform: scale(1.05);
 }
-.card-body{
-	padding: 20px;
-	min-height: 220px;
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
 }
-.card-title{
-	color: #aaa;
-	text-align: center;
-	text-transform: uppercase;
+.card-body {
+  padding: 20px;
+  min-height: 220px;
+}
+.card-title {
+  color: #aaa;
+  text-align: center;
+  text-transform: uppercase;
 }
 .card-text {
-	padding-top: 15px;
+  padding-top: 15px;
 }
-.order-link{
-	margin: 0 auto;
-	margin-top: 60px;
+.order-link {
+  margin: 0 auto;
+  margin-top: 60px;
 }
 #order-here {
-	background-color: #fff;
-	color: #333;
-	border: 2px solid #333;
-	border-radius: 10px;
-	padding: 10px 20px;
-	font-weight: bold;
-	font-family: 'Raleway', sans-serif;
-	text-transform: uppercase;
-	text-decoration: none;
-	cursor: pointer;
-	align-items: center;
-  }
-#order-here:hover{
-	color:#d43031;
-	border: 2px solid #d43031;
-	background-color: #fff;
+  background-color: #fff;
+  color: #333;
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  align-items: center;
+}
+#order-here:hover {
+  color: #d43031;
+  border: 2px solid #d43031;
+  background-color: #fff;
 }
 /* Layar Tablet, PC ++ */
 @media (min-width: 768px) {
-    .row{
-		display: flex;
-		justify-content: center;
-	}
+  .row {
+    display: flex;
+    justify-content: center;
+  }
 }
 /* Layar HP */
 @media (max-width: 767px) {
-    .card {
-        margin: 20px auto;
-    }
+  .card {
+    margin: 20px auto;
+  }
 }
 /* contact */
 #contact {
-	padding: 5px 0;
-	background: #333;
+  padding: 5px 0;
+  background: #333;
 }
 #contact .contact-item p {
-	font-size: 15px;
-	color: #777;
+  font-size: 15px;
+  color: #777;
 }
 #contact h2 {
-	position: relative;
-	text-transform: uppercase;
-	font-size: 24px;
-	font-weight: 400;
-	color: #aaa;
-	padding: 20px 0;
+  position: relative;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 400;
+  color: #aaa;
+  padding: 20px 0;
 }
 #contact h3 {
-	position: relative;
-	text-transform: uppercase;
-	font-size: 18px;
-	font-weight: 400;
-	color: #aaa;
-	padding: 20px 0;
+  position: relative;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 400;
+  color: #aaa;
+  padding: 20px 0;
 }
 #contact h3::after {
-	position: absolute;
-	content: "";
-	background: #d43031;
-	height: 2px;
-	width: 40px;
-	bottom: 0;
-	margin-left: -20px;
-	left: 50%;
+  position: absolute;
+  content: "";
+  background: #d43031;
+  height: 2px;
+  width: 40px;
+  bottom: 0;
+  margin-left: -20px;
+  left: 50%;
 }
 #contact .contact-item {
-	margin: 20px 0 40px 0;
+  margin: 20px 0 40px 0;
 }
 /* footer*/
 #footer {
-	background: #262626;
-	padding: 40px 0 20px 0;
+  background: #262626;
+  padding: 40px 0 20px 0;
 }
 #footer p {
-	font-size: 14px;
-	color: #666;
+  font-size: 14px;
+  color: #666;
 }
