@@ -78,12 +78,14 @@ function Navbar() {
                 Contact
               </a>
             </li>
-            <button type="button" className="btn btn-secondary">
-              Sign Up
-            </button>
-            <button type="button" className="btn btn-light">
-              Login
-            </button>
+            <div className="btnContainer">
+              <a className="btn " href="/register">
+                Register
+              </a>
+              <a className="btn " href="/login">
+                Login
+              </a>
+            </div>
           </ul>
         </div>
       </div>

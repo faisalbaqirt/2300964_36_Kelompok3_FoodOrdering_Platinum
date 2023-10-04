@@ -1,12 +1,20 @@
 import Contact from "../../components/Contact";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-
+import Scrollspy from "../../utils/Scrollspy";
+import { useEffect } from "react";
+import "../Home/home.css";
 function Register() {
+  useEffect(() => {
+    const scrollspy = Scrollspy();
+    return () => {
+      scrollspy.dispose();
+    };
+  }, []);
   return (
     <div>
       <Navbar />
-      <div className="container mb-5">
+      <div className="container my-5 ">
         <h2 className="text-center">Register</h2>
         <form>
           <div class="mb-3 ">
@@ -38,16 +46,6 @@ function Register() {
               class="form-control"
               id="exampleInputPassword1"
             />
-          </div>
-          <div class="mb-3 form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="exampleCheck1"
-            />
-            <label class="form-check-label" for="exampleCheck1">
-              Check me out
-            </label>
           </div>
           <button type="submit" class="btn btn-primary">
             Sign Up
