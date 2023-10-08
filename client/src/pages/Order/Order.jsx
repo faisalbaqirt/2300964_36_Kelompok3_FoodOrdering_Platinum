@@ -18,8 +18,8 @@ function Order() {
     };
   }, []);
 
-  const handleOrderSubmit = (order_id) => {
-    setOrderId(order_id);
+  const handleOrderSubmit = (id) => {
+    setOrderId(id);
     setIsOrderSubmitted(true);
   };
 

@@ -22,8 +22,9 @@ const FormOrder = ({ onOrderSubmit }) => {
 
       const response = await createOrder(orderData);
 
-      if (response && response.order_id) {
-        onOrderSubmit(response.order_id);
+      console.log(response.order_id.id)
+      if (response && response.order_id.id) {
+        onOrderSubmit(response.order_id.id);
       } else {
         console.error("Tidak dapat membuat pesanan.");
       }
