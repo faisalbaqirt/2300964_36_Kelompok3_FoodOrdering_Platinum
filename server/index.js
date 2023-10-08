@@ -1,7 +1,11 @@
+process.env.TZ = 'Asia/Jakarta';
+
 const express = require('express');
+const cors = require('cors')
 const app = express();
 
 app.use(express.json());
+app.use(cors())
 
 const productRoutes = require('./routes/ProductRoute');
 app.use('/api/products', productRoutes);

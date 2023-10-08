@@ -5,7 +5,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('orders', function(table) {
     table.increments('id').primary();
-    table.timestamp('datetime').defaultTo(knex.raw('timezone(\'Asia/Jakarta\', now())')).notNullable();
+    table.timestamp('datetime', { useTz: true }).defaultTo(knex.fn.now());
     table.integer('product_id').unsigned().references('id').inTable('products');
     table.string('product_name', 255).unsigned().references('name').inTable('products');
     table.decimal('quantity', 20);
