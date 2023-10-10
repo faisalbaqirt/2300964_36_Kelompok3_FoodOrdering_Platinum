@@ -2,9 +2,45 @@ import Contact from "../../components/Contact";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Scrollspy from "../../utils/Scrollspy";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./login.css";
+// import { useNavigate } from "react-router-dom";
+
 function Login() {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  // const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        formData
+      );
+      if (response.status === 200) {
+        alert("success");
+        console.log(response.data.accessToken);
+      } else {
+        console.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     const scrollspy = Scrollspy();
     return () => {
@@ -18,23 +54,36 @@ function Login() {
       <div className="container">
         <h2 className="text-center">Login</h2>
         <form>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">
               Username
             </label>
-            <input type="text" class="form-control" />
+            <input
+              type="text"
+              className="form-control"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+            />
           </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               Password
             </label>
             <input
               type="password"
-              class="form-control"
+              className="form-control"
               id="exampleInputPassword1"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
             />
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleLogin}
+          >
             Login
           </button>
         </form>
