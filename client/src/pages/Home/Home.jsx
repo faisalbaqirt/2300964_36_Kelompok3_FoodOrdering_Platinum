@@ -4,7 +4,8 @@ import Header from "../../components/Header";
 import Products from "../../components/Products";
 import Contact from "../../components/Contact";
 import Footer from "../../components/Footer";
-import Scrollspy from "../../utils/Scrollspy"
+import Scrollspy from "../../utils/Scrollspy";
+import ApiDocumentation from "../../components/APIDocumentation";
 import "./home.css";
 
 function Home() {
@@ -21,6 +22,7 @@ function Home() {
       <Header />
       <Products />
       <Contact />
+      <ApiDocumentation />
       <Footer />
     </div>
   );
