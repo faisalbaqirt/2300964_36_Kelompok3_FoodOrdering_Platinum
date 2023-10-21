@@ -34,7 +34,7 @@ function Products() {
                 </div>
                 <div className="card-body text-uppercase">
                   <h3 className="card-title">{product.name}</h3>
-                  <p className="card-text">1 pcs {product.description}</p>
+                  <p className="card-text">{product.description}</p>
                   <p className="card-price">Harga:{" "}
                     {Math.floor(product.price).toLocaleString("id-ID", {
                       style: "currency",
