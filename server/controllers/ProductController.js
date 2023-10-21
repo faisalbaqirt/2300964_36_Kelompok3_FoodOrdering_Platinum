@@ -1,4 +1,5 @@
 const ProductModel = require('../models/ProductModel');
+const cloudinaryService = require('../services/cloudinaryService')
 
 class ProductController {
     async getAllProducts(req, res) {
@@ -25,8 +26,22 @@ class ProductController {
     async createProduct(req, res) {
         try {
             const { name, description, price } = req.body;
-            await ProductModel.createProduct(name, description, price);
-            res.status(201).json({ status: 201, message: 'Produk berhasil ditambahkan!' });
+            const image = req.file.path;
+  
+            // upload gambar ke Cloudinary ke dalam folder 'products'
+            const folderName = 'products';
+            const imageURL = await cloudinaryService.uploadCloudinary(image, folderName);
+
+            // fs.unlinkSync(image);
+            // menyimpan data produk ke database
+            await ProductModel.createProduct({
+                name,
+                description,
+                price,
+                image: imageURL,
+            });
+
+            res.status(201).json({ status: 201, message: 'Produk berhasil ditambahkan!', imageURL });
         } catch (error) {
             res.status(500).json({ status: 500, message: error.message });
         }
@@ -35,7 +50,21 @@ class ProductController {
     async updateProduct(req, res) {
         try {
             const { name, description, price } = req.body;
-            await ProductModel.updateProduct(req.params.id, name, description, price);
+            const image = req.file.path;
+  
+            // upload gambar ke Cloudinary ke dalam folder 'products'
+            const folderName = 'products';
+            const imageURL = await cloudinaryService.uploadCloudinary(image, folderName);
+
+            // fs.unlinkSync(image);
+            await ProductModel.updateProduct(
+                req.params.id,
+                name,
+                description,
+                price,
+                imageURL
+              );
+
             res.status(201).json({ status: 201, message: 'Produk berhasil diperbarui!' });
         } catch (error) {
             res.status(500).json({ status: 500, message: error.message });

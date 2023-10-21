@@ -19,24 +19,21 @@ class ProductModel {
         }
     }
 
-    async createProduct(name, description, price) {
+    async createProduct(data) {
         try {
-            await db('products').insert({
-                name: name,
-                description: description,
-                price: price
-            });
+            await db('products').insert(data);
         } catch (error) {
             throw error;
         }
     }
 
-    async updateProduct(id, name, description, price) {
+    async updateProduct(id, name, description, price, image) {
         try {
             await db('products').where('id', id).update({
                 name: name,
                 description: description,
-                price: price
+                price: price,
+                image: image
             });
         } catch (error) {
             throw error;

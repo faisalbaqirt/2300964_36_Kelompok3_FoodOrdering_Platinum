@@ -36,6 +36,14 @@ class OrderModel {
         }
     }
 
+    async updateOrderStatus(id, newStatus) {
+        try {
+          await db('orders').where('id', id).update({ status: newStatus });
+        } catch (error) {
+          throw error;
+        }
+    }
+
     async deleteOrder(id) {
         try {
             const result = await db('orders').where('id', id).delete().returning('id');

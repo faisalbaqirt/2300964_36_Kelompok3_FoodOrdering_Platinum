@@ -75,6 +75,18 @@ class OrderController {
         }
     }
 
+    async updateOrderStatus(req, res) {
+        try {
+            const { newStatus } = req.body;
+
+            await OrderModel.updateOrderStatus(req.params.id, newStatus);
+      
+            res.status(200).json({ status: 201, message: 'Status pesanan berhasil diperbarui!' });
+        } catch (error) {
+            res.status(500).json({ status: 500, message: error.message });
+        }
+    }   
+
     async deleteOrder(req, res) {
         try {
             const id = await OrderModel.deleteOrder(req.params.id);

@@ -8,6 +8,7 @@ exports.up = function(knex) {
     table.string('name', 255).notNullable().unique();
     table.string('description', 255);
     table.decimal('price', 20);
+    table.string('image', 255);
   })
 };
 
