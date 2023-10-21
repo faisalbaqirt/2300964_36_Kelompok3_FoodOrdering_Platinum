@@ -1,5 +1,6 @@
 const ProductModel = require('../models/ProductModel');
 const cloudinaryService = require('../services/cloudinaryService')
+const fs = require('fs')
 
 class ProductController {
     async getAllProducts(req, res) {
@@ -32,7 +33,7 @@ class ProductController {
             const folderName = 'products';
             const imageURL = await cloudinaryService.uploadCloudinary(image, folderName);
 
-            // fs.unlinkSync(image);
+            fs.unlinkSync(image);
             // menyimpan data produk ke database
             await ProductModel.createProduct({
                 name,
@@ -56,7 +57,7 @@ class ProductController {
             const folderName = 'products';
             const imageURL = await cloudinaryService.uploadCloudinary(image, folderName);
 
-            // fs.unlinkSync(image);
+            fs.unlinkSync(image);
             await ProductModel.updateProduct(
                 req.params.id,
                 name,

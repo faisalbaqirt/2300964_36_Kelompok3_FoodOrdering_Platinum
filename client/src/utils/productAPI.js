@@ -24,23 +24,27 @@ export const getProductById = async (productId) => {
 };
 
 // membuat product
-export const createProduct = async (productData) => {
+export const createProduct = async (formData) => {
     try {
-      const response = await axios.post(`${API_PRODUCT_URL}`, productData);
-      if (response.status === 201) {
-        return response.data;
-      } else {
-        throw new Error('Gagal membuat product.');
-      }
+      const response = await axios.post(API_PRODUCT_URL, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
     } catch (error) {
       throw error;
     }
   };
   
 // mengupdate product berdasarkan ID
-export const updateProduct = async (productId, updatedData) => {
+export const updateProduct = async (productId, formData) => {
   try {
-    const response = await axios.put(`${API_PRODUCT_URL}/${productId}`, updatedData);
+    const response = await axios.put(`${API_PRODUCT_URL}/${productId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     throw error;

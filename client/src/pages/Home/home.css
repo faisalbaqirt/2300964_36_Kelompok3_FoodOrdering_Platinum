@@ -143,24 +143,31 @@ header .intro-text {
 .card:hover {
   transform: scale(1.05);
 }
+.card-header {
+  background-color: white;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
 .card-img-top {
+  padding: 10px 0;
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  margin: 0;
-  padding: 0;
+  max-height: 200px;
 }
 .card-body {
   padding: 20px;
   min-height: 220px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 .card-title {
   color: #aaa;
   text-align: center;
-  text-transform: uppercase;
 }
 .card-text {
   padding-top: 15px;
+  margin-bottom: auto;
 }
 .order-link {
   margin: 0 auto;
@@ -185,14 +192,14 @@ header .intro-text {
   background-color: #fff;
 }
 /* Layar Tablet, PC ++ */
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .row {
     display: flex;
     justify-content: center;
   }
 }
 /* Layar HP */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .card {
     margin: 20px auto;
   }

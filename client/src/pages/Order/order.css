@@ -149,14 +149,22 @@ header .intro-text {
 	background-color: #fff;
 }
 /* Invoice */
-#invoice{
+.invoice-container,.invoice-table-container, .invoice-payment{
 	padding: 20px;
-	background: #333;
-	width: 100%;
-	color: #888;
 }
-#invoice h2{
-	color: #aaa;
+.invoice-container{
+	background-color: #5e5e5e31;
+}
+#invoice{
+	border: none;
+	border-radius: 10px;
+	margin-top: 20px;
+	padding: 20px;
+	background: white;
+	width: 100%;
+}
+#invoice p, #invoice h2, .invoice-table td{
+	color:#333;
 }
 .invoice-head {
 	display: flex;
@@ -172,55 +180,19 @@ header .intro-text {
 	text-align: right;
 }
 .invoice-table{
-	padding: 30px;
-}
-.invoice-table .row > div {
-    width: 25%;
-    text-align: center;
-    border: 1px solid #444;
-    padding: 20px;
-}
-#table-head{
-	font-weight: bold;
-}
-#table-product{
-	text-align: left;
-}
-#invoice-product{
-	text-align: left !important;
-	display: block !important;
-}
-#invoice .invoice-payment{
-	padding: 20px;
-}
-#total-invoice{
-	position: absolute;
-	right: 20px;
-}
-.invoice-foot{
-	text-align: left;
-	margin-top: 20px;
+	width: 100%;
+	border-collapse: collapse;
 }
 .invoice-foot .note{
+	margin-top: 20px;
 	font-size: 12px;
 	text-align: center;
 }
-#back-to-order{
-	position: relative;
-	left: 20px;
-	background-color: #333;
-	color: #888;
-	border: 2px solid #888;
-	border-radius: 10px;
-	font-weight: bold;
-	padding: 10px 20px;
-	cursor: pointer;
-	align-items: center;
-}
-#back-to-order:hover{
-	background-color: #333;
-	color:#d43031;
-	border: 2px solid #d43031;
+.invoice-action{
+	margin: 0 auto;
+	padding: 30px;
+	display: flex;
+	justify-content: space-between;
 }
 /* Footer Section*/
 #footer{
@@ -230,4 +202,9 @@ header .intro-text {
 #footer p{
 	font-size: 14px;
 	color: #666;
+}
+@media (max-width: 768px) {
+	.invoice-table-container{
+		overflow-x: scroll;
+	}
 }

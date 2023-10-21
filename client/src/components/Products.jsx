@@ -1,44 +1,58 @@
+import { useState, useEffect } from "react";
+import { getAllProducts } from "../utils/productAPI";
+
 function Products() {
-    return (
-        <div className="container" id="products">
-            <h2>Menu</h2>
-            <div className="row justify-content-center">
-                {/* produk 1 */}
-                <div className="col-md-4 col-sm-12">
-                    <div className="card">
-                        <img
-                            src="/ayamgeprek1.jpg"
-                            className="card-img-top"
-                            alt="Produk 1"
-                        />
-                        <div className="card-body">
-                            <h3 className="card-title">Paket Ayam Geprek</h3>
-                            <p className="card-text">1 Piece Ayam Geprek with Rice</p>
-                            <p className="card-price">Price: Rp. 15.000</p>
-                        </div>
-                    </div>
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const productsData = await getAllProducts();
+      setProducts(productsData.data);
+      console.log("Data dari API:", productsData.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+  return (
+    <div className="container" id="products">
+      <h2>Menu</h2>
+      <div className="row justify-content-center">
+        {products.map((product) => {
+          return (
+            <div className="col-md-4 col-sm-12">
+              <div className="card">
+                <div className="card-header">
+                <img
+                  src={product.image}
+                  className="card-img-top"
+                  alt={product.name}
+                />
                 </div>
-                {/* produk 2 */}
-                <div className="col-md-4 col-sm-12">
-                    <div className="card">
-                        <img
-                            src="/ayamgeprek2.jpg"
-                            className="card-img-top"
-                            alt="Produk 2"
-                        />
-                        <div className="card-body">
-                            <h3 className="card-title">Ayam Geprek</h3>
-                            <p className="card-text">1 Piece Ayam Geprek without Rice</p>
-                            <p className="card-price">Price: Rp. 12.000</p>
-                        </div>
-                    </div>
+                <div className="card-body text-uppercase">
+                  <h3 className="card-title">{product.name}</h3>
+                  <p className="card-text">1 pcs {product.description}</p>
+                  <p className="card-price">Harga:{" "}
+                    {Math.floor(product.price).toLocaleString("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                    })}</p>
                 </div>
+              </div>
             </div>
-            <div className="order-link text-center">
-                <a href="/order#order" id="order-here">Order Here!</a>
-            </div>
-        </div>
-    )
-};
+          );
+        })}
+      </div>
+      <div className="order-link text-center">
+        <a href="/order#order" id="order-here">
+          Order Here!
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export default Products;

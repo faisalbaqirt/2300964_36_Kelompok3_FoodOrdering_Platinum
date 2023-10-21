@@ -47,6 +47,16 @@ export const updateOrder = async (orderId, updatedData) => {
   }
 };
 
+// update order status untuk admin
+export const updateOrderStatus = async (orderId, newStatus) => {
+  try {
+    const response = await axios.put(`${API_ORDER_URL}/status/${orderId}`, newStatus);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // menghapus order berdasarkan ID
 export const deleteOrder = async (orderId) => {
   try {
