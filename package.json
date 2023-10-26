@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-server": "node server/index.js",
+    "start-server": "npx nodemon server/index.js",
     "start-client": "cd client && npm start",
     "dev": "concurrently \"npm run start-server\" \"npm run start-client\""
   },
@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "knex": "^2.5.1",
     "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.0.1",
     "pg": "^8.11.3"
   },
   "devDependencies": {

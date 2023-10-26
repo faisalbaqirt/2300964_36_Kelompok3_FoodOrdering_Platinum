@@ -22,7 +22,7 @@ const FormOrder = ({ onOrderSubmit }) => {
 
       const response = await createOrder(orderData);
 
-      console.log(response.order_id.id)
+      console.log(response)
       if (response && response.order_id.id) {
         onOrderSubmit(response.order_id.id);
       } else {
