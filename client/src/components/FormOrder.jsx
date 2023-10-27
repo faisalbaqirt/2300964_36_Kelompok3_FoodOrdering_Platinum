@@ -22,7 +22,7 @@ const FormOrder = ({ onOrderSubmit }) => {
 
       const response = await createOrder(orderData);
 
-      console.log(response)
+      console.log(response);
       if (response && response.order_id.id) {
         onOrderSubmit(response.order_id.id);
       } else {
@@ -40,7 +40,7 @@ const FormOrder = ({ onOrderSubmit }) => {
       </div>
       <div className="order-content">
         <form onSubmit={handleOrderSubmit}>
-          <label for="product_name">Nama Produk:</label>
+          <label htmlFor="product_name">Nama Produk:</label>
           <select
             id="product_name"
             className="form-control"
@@ -54,7 +54,7 @@ const FormOrder = ({ onOrderSubmit }) => {
           </select>
           <br />
 
-          <label for="quantity">Jumlah:</label>
+          <label htmlFor="quantity">Jumlah:</label>
           <input
             type="number"
             id="quantity"
@@ -66,7 +66,7 @@ const FormOrder = ({ onOrderSubmit }) => {
           />
           <br />
 
-          <label for="name">Nama Pemesan:</label>
+          <label htmlFor="name">Nama Pemesan:</label>
           <input
             type="text"
             id="name"
@@ -78,7 +78,7 @@ const FormOrder = ({ onOrderSubmit }) => {
           />
           <br />
 
-          <label for="telephone">Telepon:</label>
+          <label htmlFor="telephone">Telepon:</label>
           <input
             type="text"
             id="telephone"
@@ -90,7 +90,7 @@ const FormOrder = ({ onOrderSubmit }) => {
           />
           <br />
 
-          <label for="address">Alamat:</label>
+          <label htmlFor="address">Alamat:</label>
           <input
             type="text"
             id="address"
