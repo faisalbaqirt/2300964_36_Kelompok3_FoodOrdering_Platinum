@@ -2,9 +2,11 @@ process.env.TZ = "Asia/Jakarta";
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const passport = require("./lib/passport");
 
 app.use(express.json());
 app.use(cors());
+app.use(passport.initialize());
 
 const productRoutes = require("./routes/ProductRoute");
 app.use("/api/products", productRoutes);
