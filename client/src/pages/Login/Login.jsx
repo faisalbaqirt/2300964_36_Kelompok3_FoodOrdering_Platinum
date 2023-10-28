@@ -5,7 +5,7 @@ import Scrollspy from "../../utils/Scrollspy";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./login.css";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ function Login() {
     password: "",
   });
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,9 +30,8 @@ function Login() {
         "http://localhost:5000/api/auth/login",
         formData
       );
-      if (response.status === 200) {
-        alert("success");
-        console.log(response.data.accessToken);
+      if (response.status === 200 && response.data.accessToken) {
+        navigate("/admin");
       } else {
         console.error(response.data.message);
       }
