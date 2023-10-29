@@ -4,6 +4,7 @@ import Order from "./pages/Order/Order";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Admin from "./pages/Admin/Admin";
+import Profile from "./pages/Profile/Profile";
 import "./App.css"
 
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/admin/*" element={<Admin />} />
+        <Route path="/profile" element={<Profile />}></Route>
       </Routes>
     </BrowserRouter>
   );
