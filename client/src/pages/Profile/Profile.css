@@ -1,0 +1,108 @@
+.container-profile {
+    background: #777;
+    overflow: hidden;
+    color: #fff;
+    width: 100%;
+    max-width: 5000px;
+}
+
+/* Profile page */
+.container-profile .Profile {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  min-height: 120vh;
+  margin-top: 60px;
+  margin-bottom: -200px;
+}
+
+/* User information */
+.container-profile .Profile .user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  text-align: left;
+  min-height: 70vh;
+}
+
+/* Image */
+.container-profile .Profile .user-info img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 2px solid #007bff;
+}
+
+/* Input fields */
+.container-profile .Profile .user-info input {
+  width: 97%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+
+.container-profile .Profile .user-info .card-info  {
+  text-align: left;
+  color: rgb(235, 235, 235);
+  margin-bottom: 10px;
+  width: 100%;
+  margin-top: 40px;
+  padding-top: -200;
+  font-family: "Raleway", sans-serif;
+}
+/* Change username and password */
+.container-profile .Profile .user-info h3 {
+  text-align: left;
+  color: black;
+}
+
+.container-profile .Profile .user-info h3 {
+    text-align: left;
+    font-family: "Raleway", sans-serif;
+}
+
+/* Button */
+.container-profile .Profile .user-info button {
+  background-color: #192655;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+  font-size: "Raleway", sans-serif;
+}
+
+.container-profile .Profile .user-info button:hover {
+  background-color: #144594; 
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+  .user-info {
+    padding: 10px;
+  }
+
+  .user-info img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .user-info input {
+    width: 90%;
+  }
+
+  .user-info button {
+    font-size: 14px;
+  }
+}

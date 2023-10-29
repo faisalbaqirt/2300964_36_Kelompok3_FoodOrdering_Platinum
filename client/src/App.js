@@ -4,7 +4,8 @@ import Order from "./pages/Order/Order";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Admin from "./pages/Admin/Admin";
-import "./App.css";
+import Profile from "./pages/Profile/Profile";
+import "./App.css"
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route path="/order" element={<Order />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/admin/*" element={<Admin />}></Route>
+        <Route path="/admin/*" element={<Admin />} />
+        <Route path="/profile" element={<Profile />}></Route>
       </Routes>
     </BrowserRouter>
   );
