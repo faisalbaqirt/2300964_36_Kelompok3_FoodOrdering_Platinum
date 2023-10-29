@@ -7,7 +7,6 @@ import Admin from "./pages/Admin/Admin";
 import Profile from "./pages/Profile/Profile";
 import "./App.css"
 
-
 function App() {
   return (
     <BrowserRouter>
