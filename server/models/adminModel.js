@@ -11,6 +11,11 @@ class AdminModel {
     return totalOrders[0].count;
   }
 
+  async getTotalUsers() {
+    const totalUsers = await db("users").count();
+    return totalUsers[0].count;
+  }
+
   async getOrdersByYearAndMonth(year, month) {
     return db("orders")
       .where(db.raw("EXTRACT(YEAR FROM created_at) = ?", [year]))

@@ -1,107 +1,60 @@
 import { useState, useEffect } from "react";
-import {
-  getAllProducts,
-  createProduct,
-  updateProduct,
-
-} from "../../../utils/productAPI";
-
+import { getAllUsers, deleteUser } from "../../../utils/userAPI";
 
 const AdminUsers = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [products, setProducts] = useState([]);
-  const [isEditing, setIsEditing] = useState(false); // Status apakah sedang dalam mode edit
-  const [showModal, setShowModal] = useState(false);
+  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const [showFullImage, setShowFullImage] = useState(false);
-  const [fullImageSrc, setFullImageSrc] = useState('')
-  const [editedProduct, setEditedProduct] = useState({
-    id: null,
-    name: "",
-    description: "",
-    price: "",
-    image: null,
-  });
+  const [fullImageSrc, setFullImageSrc] = useState("");
 
   useEffect(() => {
-    fetchProducts();
+    fetchUsers();
   }, []);
 
-  const fetchProducts = async () => {
+  const fetchUsers = async () => {
     try {
-      const productsData = await getAllProducts();
-      setProducts(productsData.data);
-      console.log("Data dari API:", productsData.data);
+      const usersData = await getAllUsers();
+      const sortedUsers = usersData.data.sort((a, b) => a.id - b.id);
+      setUsers(sortedUsers);
+
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching users:", error);
     }
   };
 
-  const handleCreate = () => {
-    setShowModal(true);
-  };
-
-  // const handleEdit = (product) => {
-  //   setIsEditing(true);
-  //   setEditedProduct({
-  //     id: product.id,
-  //     name: product.name,
-  //     description: product.description,
-  //     price: product.price,
-  //     image: null,
-  //   });
-  //   setShowModal(true);
-  // };
-
-  const handleSave = async () => {
-    try {
-      setIsLoading(true);
-      const { id, name, description, price, image } = editedProduct;
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("description", description);
-      formData.append("price", price);
-      formData.append("image", image);
-
-      if (isEditing) {
-        await updateProduct(id, formData);
-      } else {
-        await createProduct(formData);
-      }
-
-      setIsLoading(false);
-      setIsEditing(false);
-      setShowModal(false);
-      fetchProducts();
-    } catch (error) {
-      console.error(error);
+  const handleSelectUser = (e, userId) => {
+    if (e.target.checked) {
+      setSelectedUsers((prevSelected) => [...prevSelected, userId]);
+    } else {
+      setSelectedUsers((prevSelected) =>
+        prevSelected.filter((id) => id !== userId)
+      );
     }
   };
 
-  const handleCancel = () => {
-    setIsEditing(false);
-    setShowModal(false);
-    setEditedProduct({
-      id: null,
-      name: "",
-      description: "",
-      price: "",
-      image: null,
-    });
+  const handleDeleteSelectedUsers = async () => {
+    try {
+      setIsLoading(true)
+      // permintaan HTTP untuk menghapus pesanan dari database
+      await Promise.all(selectedUsers.map((userId) => deleteUser(userId)));
+
+      console.log("User yang dipilih berhasil dihapus");
+    } catch (error) {
+      console.error("Terjadi kesalahan saat menghapus user:", error);
+    }
+
+    setSelectedUsers([]);
+    setIsLoading(false)
+    fetchUsers();
   };
-  // const handleDeleteProduct = async (productId) => {
-  //   try {
-  //     await deleteProduct(productId);
-  //     setProducts((prevProducts) =>
-  //       prevProducts.filter((prevProduct) => prevProduct.id !== productId)
-  //     );
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+
+  const isDeleteVisible = selectedUsers.length > 0;
+  const selectedCount = selectedUsers.length;
 
   return (
     <>
-      <div className="container" id="orderlist">
+      <div className="container" id="userlist">
         <div className="content-title text-center">
           <h2> User List</h2>
         </div>
@@ -110,171 +63,102 @@ const AdminUsers = () => {
             <div className="spinner-border text-light" role="status"></div>
           </div>
         )}
-        <div className="content-head">
-          <button className="btn btn-dark admin-button-add" onClick={handleCreate}>
-            Add
-          </button>
-        </div>
+        {isDeleteVisible && (
+          <div className="select-visible">
+            <button
+              type="button"
+              className="btn-close"
+              onClick={(e) => setSelectedUsers([])}
+            ></button>
 
+            <p style={{ color: "black" }}>{selectedCount} selected</p>
+
+            <button
+              type="submit"
+              className="btn btn-danger"
+              onClick={handleDeleteSelectedUsers}
+            >
+              <i className="bi bi-trash3"></i>
+            </button>
+          </div>
+        )}
         <div className="table-container">
           <table className="table admin-table">
             <thead>
               <tr className="table-dark">
+                <th>
+                  <input
+                    type="checkbox"
+                    checked={selectedUsers.length === users.length}
+                    onChange={(e) =>
+                      e.target.checked
+                        ? setSelectedUsers(users.map((user) => user.id))
+                        : setSelectedUsers([])
+                    }
+                  />
+                </th>
                 <th>ID</th>
                 <th>Foto</th>
                 <th>Nama</th>
-                <th>Deskripsi</th>
-                <th>Harga</th>
+                <th>Username</th>
+                <th>Email</th>
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
-                <tr key={product.id}>
-                  <td>{product.id}</td>
+              {users.map((user) => (
+                <tr key={user.id}>
                   <td>
-                    <a href={product.image} className="avatar" onClick={(e) => {e.preventDefault(); setShowFullImage(true); setFullImageSrc(product.image); }}>
-                      <img src={product.image} alt={product.name} />
+                    <input
+                      type="checkbox"
+                      checked={selectedUsers.includes(user.id)}
+                      onChange={(e) => handleSelectUser(e, user.id)}
+                    />
+                  </td>
+                  <td>{user.id}</td>
+                  <td>
+                    <a
+                      href={user.photo}
+                      className="avatar"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowFullImage(true);
+                        setFullImageSrc(user.photo);
+                      }}
+                    >
+                      <img src={user.photo} alt={user.name} />
                     </a>
                   </td>
-                  <td>{product.name}</td>
-                  <td>{product.description}</td>
-                  <td>
-                    {Math.floor(product.price).toLocaleString("id-ID", {
-                      style: "currency",
-                      currency: "IDR",
-                    })}
-                  </td>
+                  <td>{user.name}</td>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        {showModal && (
+
+        {showFullImage && (
           <div className="modal">
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">
-                    {isEditing ? "Edit Produk" : "Tambah Produk"}
-                  </h5>
+                  <h5 className="modal-title">Foto Profil</h5>
                   <button
                     type="button"
                     className="btn-close"
-                    onClick={handleCancel}
+                    onClick={() => {
+                      setShowFullImage(false);
+                      setFullImageSrc("");
+                    }}
                   ></button>
                 </div>
-                <div className="modal-body">
-                  <form>
-                    <label htmlFor="name">Nama Produk:</label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="form-control"
-                      name="name"
-                      required
-                      value={editedProduct.name}
-                      onChange={(e) =>
-                        setEditedProduct({
-                          ...editedProduct,
-                          name: e.target.value,
-                        })
-                      }
-                    />
-                    <br />
-
-                    <label htmlFor="description">Deskripsi Produk:</label>
-                    <input
-                      type="text"
-                      id="description"
-                      className="form-control"
-                      name="description"
-                      required
-                      value={editedProduct.description}
-                      onChange={(e) =>
-                        setEditedProduct({
-                          ...editedProduct,
-                          description: e.target.value,
-                        })
-                      }
-                    />
-                    <br />
-
-                    <label htmlFor="price">Harga Produk:</label>
-                    <input
-                      type="text"
-                      id="price"
-                      className="form-control"
-                      name="price"
-                      required
-                      value={editedProduct.price}
-                      onChange={(e) =>
-                        setEditedProduct({
-                          ...editedProduct,
-                          price: e.target.value,
-                        })
-                      }
-                    />
-                    <br />
-
-                    <label htmlFor="image">Gambar Produk:</label>
-                    <input
-                      type="file"
-                      id="image"
-                      className="form-control"
-                      name="image"
-                      required
-                      onChange={(e) =>
-                        setEditedProduct({
-                          ...editedProduct,
-                          image: e.target.files[0],
-                        })
-                      }
-                    />
-                    <br />
-                  </form>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={handleCancel}
-                  >
-                    Batal
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={handleSave}
-                  >
-                    Simpan
-                  </button>
+                <div className="modal-body d-flex justify-content-center align-items-center">
+                  <img src={fullImageSrc} alt="Full" className="img-fluid" />
                 </div>
               </div>
             </div>
           </div>
         )}
-        {showFullImage && (
-        <div className="modal">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">
-                  Foto Profil
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => { setShowFullImage(false); setFullImageSrc(''); }}
-                ></button>
-              </div>
-              <div className="modal-body d-flex justify-content-center align-items-center">
-              <img src={fullImageSrc} alt="Full" className="img-fluid" />
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      )}
       </div>
     </>
   );

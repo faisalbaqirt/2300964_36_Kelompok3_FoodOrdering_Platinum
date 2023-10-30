@@ -133,7 +133,7 @@ function Invoice({ orderId, onBackToOrder }) {
           Back
         </button>
         <button className="btn btn-dark" onClick={handleDownload}>
-          Download disini
+          Download
         </button>
       </div>
     </div>

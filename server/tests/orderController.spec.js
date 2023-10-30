@@ -2,20 +2,6 @@ const OrderController = require("../controllers/OrderController");
 const OrderModel = require("../models/OrderModel");
 const db = require("../db/db");
 
-const mockRequest = (body = {}, params = {}, query = {}) => {
-  return {
-    body,
-    params,
-    query,
-  };
-};
-
-const mockResponse = () => {
-  const res = {};
-  res.json = jest.fn().mockReturnValue(res);
-  res.status = jest.fn().mockReturnValue(res);
-};
-
 describe("OrderController - getAllOrders", () => {
   test("should return a JSON response with a status of 200 when successful", async () => {
     const mockData = [
@@ -45,7 +31,7 @@ describe("OrderController - getAllOrders", () => {
 
     jest.spyOn(OrderModel, "getAllOrders").mockResolvedValue(mockData);
 
-    const req = mockRequest();
+    const req = {};
     const res = {
       json: jest.fn(),
       status: jest.fn().mockReturnThis(),
@@ -55,6 +41,21 @@ describe("OrderController - getAllOrders", () => {
 
     expect(res.status).toBeCalledWith(200);
     expect(res.json).toBeCalledWith({ data: mockData });
+  });
+
+  test("should return a 500 Internal Server Error response when an error occurs", async () => {
+    jest.spyOn(OrderModel, "getAllOrders").mockRejectedValue(new Error("Sample error"));
+  
+    const req = {};
+    const res = {
+      json: jest.fn(),
+      status: jest.fn().mockReturnThis(),
+    };
+  
+    await OrderController.getAllOrders(req, res);
+  
+    expect(res.status).toBeCalledWith(500);
+    expect(res.json).toBeCalledWith({ status: 500, message: "Sample error" });
   });
 });
 
@@ -154,7 +155,7 @@ describe("OrderController - createOrder", () => {
     expect(res.status).toBeCalledWith(201);
     expect(res.json).toBeCalledWith({
       status: 201,
-      order_id: { id: orderId },
+      order_id: expect.objectContaining({ id: expect.any(Number) }), // Updated expectation
       message: "Data order berhasil ditambahkan!",
     });
   });

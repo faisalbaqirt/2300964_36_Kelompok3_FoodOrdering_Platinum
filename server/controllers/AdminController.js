@@ -5,10 +5,12 @@ class AdminController {
     try {
       const totalProducts = await AdminModel.getTotalProducts();
       const totalOrders = await AdminModel.getTotalOrders();
+      const totalUsers = await AdminModel.getTotalUsers();
 
       res.json({
         totalProducts: totalProducts,
         totalOrders: totalOrders,
+        totalUsers: totalUsers
       });
     } catch (error) {
       console.error(error);

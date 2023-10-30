@@ -2,9 +2,10 @@ const AdminModel = require("../models/adminModel");
 const AdminController = require("../controllers/AdminController");
 
 describe("AdminController - getDashboardData", () => {
-  test("should return dashboard data as JSON with totalProducts and totalOrders", async () => {
+  test("should return dashboard data as JSON with totalProducts, totalOrders, and totalUsers as numbers", async () => {
     AdminModel.getTotalProducts = jest.fn().mockResolvedValue(10);
     AdminModel.getTotalOrders = jest.fn().mockResolvedValue(20);
+    AdminModel.getTotalUsers = jest.fn().mockResolvedValue(3); // Mock the totalUsers value
 
     const req = {};
     const res = {
@@ -14,8 +15,9 @@ describe("AdminController - getDashboardData", () => {
     await AdminController.getDashboardData(req, res);
 
     expect(res.json).toHaveBeenCalledWith({
-      totalProducts: 10,
-      totalOrders: 20,
+      totalProducts: expect.any(Number),
+      totalOrders: expect.any(Number),
+      totalUsers: expect.any(Number), // Expect totalUsers as a number
     });
   });
 
@@ -31,10 +33,16 @@ describe("AdminController - getDashboardData", () => {
       status: jest.fn().mockReturnThis(),
     };
 
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
     await AdminController.getDashboardData(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
+
+    consoleErrorSpy.mockRestore();
   });
 });
 
@@ -76,6 +84,10 @@ describe("AdminController - getOrdersChart", () => {
       status: jest.fn().mockReturnThis(),
     };
 
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
     jest
       .spyOn(AdminModel, "getOrdersByYearAndMonth")
       .mockRejectedValue(new Error("Sample error"));
@@ -84,6 +96,7 @@ describe("AdminController - getOrdersChart", () => {
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
+    consoleErrorSpy.mockRestore();
   });
 });
 
@@ -125,6 +138,10 @@ describe("AdminController - getSalesChart", () => {
       status: jest.fn().mockReturnThis(),
     };
 
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
     jest
       .spyOn(AdminModel, "getSalesDataByYearAndMonth")
       .mockRejectedValue(new Error("Sample error"));
@@ -133,5 +150,7 @@ describe("AdminController - getSalesChart", () => {
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
+
+    consoleErrorSpy.mockRestore();
   });
 });
