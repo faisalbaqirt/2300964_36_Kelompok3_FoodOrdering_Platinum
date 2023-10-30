@@ -23,9 +23,6 @@ const signUp = async (req, res) => {
   } catch (error) {
     console.error(error);
   }
-  // finally {
-  //   db.destroy();
-  // }
 };
 
 const login = async (req, res) => {
@@ -38,11 +35,10 @@ const login = async (req, res) => {
       return res.json({ message: "user not found" });
     }
 
-    const isPasswordValid = bcrypt.compareSync(
+    const isPasswordValid = await bcrypt.compare(
       password.toString(),
       user.password
     );
-
     if (!isPasswordValid) {
       return res.json({ message: "Wrong Password" });
     }
@@ -51,7 +47,7 @@ const login = async (req, res) => {
       {
         id: user.id,
         username: user.username,
-        role: user.role
+        role: user.role,
       },
       secretKey
     );
@@ -105,7 +101,7 @@ const editProfile = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try {
     const data = await userModel.getAllUsers();
-    res.json({ status: 200, data });
+    res.status(200).json({ status: 200, data });
   } catch (error) {
     res.status(500).json({ status: 500, message: error.message });
   }
@@ -117,7 +113,7 @@ const getUserById = async (req, res) => {
     if (!data) {
       res.json({ status: 404, message: "Produk tidak ditemukan!" });
     }
-    res.json({ status: 200, data });
+    res.status(200).json({ status: 200, data });
   } catch (error) {
     res.status(500).json({ status: 500, message: error.message });
   }
@@ -126,7 +122,7 @@ const getUserById = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const id = await userModel.deleteUser(req.params.id);
-    res.status(201).json({ status: 201, message: "Produk berhasil dihapus!" });
+    res.status(201).json({ status: 201, message: "User berhasil dihapus!" });
   } catch (error) {
     res.status(500).json({ status: 500, message: error.message });
   }
