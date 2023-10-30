@@ -19,8 +19,6 @@ class UserController {
       });
     } catch (error) {
       console.error(error);
-    } finally {
-      db.destroy();
     }
   }
 
@@ -28,37 +26,30 @@ class UserController {
     try {
       const { username, password } = req.body;
 
-      db("users")
-        .where({ username: username })
-        .first()
-        .then((user) => {
-          if (!user) {
-            return res.json({ message: "user not found" });
-          }
+      const user = await db("users").where({ username }).first();
 
-          const isPasswordValid = bcrypt.compareSync(
-            password.toString(),
-            user.password
-          );
+      if (!user) {
+        return res.json({ message: "user not found" });
+      }
 
-          if (!isPasswordValid) {
-            return res.json({ message: "Wrong Password" });
-          }
+      const isPasswordValid = await bcrypt.compare(
+        password.toString(),
+        user.password
+      );
+      if (!isPasswordValid) {
+        return res.json({ message: "Wrong Password" });
+      }
 
-          const accessToken = jwt.sign(
-            {
-              id: user.id,
-              username: user.username,
-            },
-            secretKey
-          );
+      const accessToken = jwt.sign(
+        { id: user.id, username: user.username },
+        secretKey
+      );
 
-          return res.status(200).json({
-            id: user.id,
-            username: user.username,
-            accessToken: accessToken,
-          });
-        });
+      return res.status(200).json({
+        id: user.id,
+        username: user.username,
+        accessToken: accessToken,
+      });
     } catch (error) {
       console.error(error);
     }
