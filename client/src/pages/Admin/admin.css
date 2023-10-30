@@ -44,7 +44,7 @@
         position: fixed;
         bottom: 20px;
     }
-    .dropdown-menu {
+    .sidebar-footer .dropdown-menu {
         transform: translateY(-160%);
     }
 
@@ -160,6 +160,10 @@
 .table-container .admin-table th,
 td {
     vertical-align: middle;
+}
+#orderlist .table-container .admin-table th,
+td {
+    text-transform: capitalize;
 }
 .table-container .admin-table td {
     font-size: small;

@@ -23,7 +23,7 @@ function Products() {
       <div className="row justify-content-center">
         {products.map((product) => {
           return (
-            <div className="col-md-4 col-sm-12">
+            <div className="col-md-4 col-sm-12" key={product.id}>
               <div className="card">
                 <div className="card-header">
                 <img

@@ -5,7 +5,6 @@ import {
   updateOrderStatus,
   deleteOrder,
 } from "../../../utils/orderAPI";
-import { capitalize } from "lodash";
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -189,8 +188,8 @@ const AdminOrders = () => {
                   </td>
                   <td>{order.id}</td>
                   <td>{order.created_at}</td>
-                  <td>{capitalize(order.name)}</td>
-                  <td>{capitalize(order.product_name)}</td>
+                  <td>{order.name}</td>
+                  <td>{order.product_name}</td>
                   <td>{Math.floor(order.quantity)}</td>
                   <td>
                     {Math.floor(order.total_amount).toLocaleString("id-ID", {
@@ -199,7 +198,7 @@ const AdminOrders = () => {
                     })}
                   </td>
                   <td>{order.telephone}</td>
-                  <td>{capitalize(order.address)}</td>
+                  <td>{order.address}</td>
                   <td>{order.status}</td>
                   <td>
                     {order.status === "Belum Bayar" && (

@@ -83,7 +83,7 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <div className="container" id="productlist">
+      <div className="container" id="admin-dashboard">
         <div className="content-title text-center">
           <h2>Dashboard</h2>
         </div>
@@ -120,7 +120,7 @@ const AdminDashboard = () => {
                 <div className="dashboard-item text-uppercase">
                   <div className="col-auto">
                     <h5 className="text-light">Total Users</h5>
-                    <p>{dashboardData.totalProducts}</p>
+                    <p>{dashboardData.totalUsers}</p>
                   </div>
                   <div className="col-auto">
                     <div className="icon-dash">
