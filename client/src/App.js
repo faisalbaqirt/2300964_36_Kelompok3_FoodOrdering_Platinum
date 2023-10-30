@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Admin from "./pages/Admin/Admin";
 import Profile from "./pages/Profile/Profile";
+import APIDocsPage from "./pages/Documentation/Documentation";
 import "./App.css"
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
         <Route path="/register" element={isAuthenticated  ? <Navigate to="/profile" /> : <Register />} />
         <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" />} />
         <Route path="/admin/*" element={isAdmin ? <Admin /> : <Navigate to="/" />} />
+        <Route path="/documentation" component={APIDocsPage} />
       </Routes>
     </BrowserRouter>
     </UserContext.Provider>
