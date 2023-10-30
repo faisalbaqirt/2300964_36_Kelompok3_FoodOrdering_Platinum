@@ -1,6 +1,15 @@
+import { useContext } from "react";
+import UserContext from "../../../context/UserContext";
+
 const AdminSidebar = ({ routes }) => {
+  const user = useContext(UserContext);
   const activeRoute = (routeName) => {
     return window.location.pathname.indexOf(routeName) > -1 ? "active" : "";
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    window.location.href = "/login";
   };
 
   return (
@@ -57,17 +66,17 @@ const AdminSidebar = ({ routes }) => {
               aria-haspopup="true"
             >
               <i className="bi bi-person-circle"></i>
-              <span className="ms-2 text-uppercase">Admin</span>
+              <span className="ms-2 text-uppercase">{user.username}</span>
             </button>
             <div className="dropdown-menu">
               <a href="/profile" className="dropdown-item">
                 <i className="bi bi-person"></i>
                 <span className="ms-2">Profile</span>
               </a>
-              <a href="/" className="dropdown-item">
+              <button onClick={handleLogout} className="dropdown-item">
                 <i className="bi bi-box-arrow-left"></i>
                 <span className="ms-2">Logout</span>
-              </a>
+              </button>
             </div>
           </div>
         </div>

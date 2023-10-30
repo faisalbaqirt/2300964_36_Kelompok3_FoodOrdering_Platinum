@@ -1,110 +1,61 @@
 .container-profile {
-    background: #777;
-    overflow: hidden;
-    color: #fff;
-    width: 100%;
-    max-width: 5000px;
+  background-color: #666;
+  width: 100%;
+
 }
 
 /* Profile page */
-.container-profile .Profile {
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  min-height: 120vh;
-  margin-top: 60px;
-  margin-bottom: -200px;
+.container-profile .profile {
+  border: none;
+	border-radius: 10px;
+	padding: 20px;
 }
 
+.profile-title {
+  margin-top: 50px;
+}
 /* User information */
-.container-profile .Profile .user-info {
+.container-profile .profile .user-info {
+  background-color: #fff;
+  width: 80%;
+  margin: 0 auto;
+  border: none;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  margin-top: 30px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  text-align: left;
-  min-height: 70vh;
 }
 
+.info-header {
+  margin: 20px;
+}
+
+.info-body {
+  margin: 20px;
+  padding: 20px;
+}
+
+.info-footer {
+  margin: 20px;
+}
 /* Image */
-.container-profile .Profile .user-info img {
+.container-profile .profile .user-info img {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin-bottom: 10px;
-  margin-top: 100px;
   border: 2px solid #007bff;
 }
 
-/* Input fields */
-.container-profile .Profile .user-info input {
-  width: 97%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-
-.container-profile .Profile .user-info .card-info  {
-  text-align: left;
-  color: rgb(235, 235, 235);
-  margin-bottom: 10px;
-  width: 100%;
-  margin-top: 40px;
-  padding-top: -200;
-  font-family: "Raleway", sans-serif;
-}
-/* Change username and password */
-.container-profile .Profile .user-info h3 {
-  text-align: left;
-  color: black;
-  margin-top: 20px;
-}
-
-.container-profile .Profile .user-info h3 {
-    text-align: left;
-    font-family: "Raleway", sans-serif;
-}
-
-/* Button */
-.container-profile .Profile .user-info button {
-  background-color: #192655;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 30px;
-  transition: background-color 0.3s;
-  font-size: "Raleway", sans-serif;
-}
-
-.container-profile .Profile .user-info button:hover {
-  background-color: #144594; 
-}
-
-/* Responsive styling */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .user-info {
     padding: 10px;
   }
+  .info-body h3 {
+    font-size: 14px; /* Atur ukuran font lebih kecil untuk perangkat seluler */
+  }
 
-  .user-info img {
+  .info-header img {
     width: 100px;
     height: 100px;
-  }
-
-  .user-info input {
-    width: 90%;
-  }
-
-  .user-info button {
-    font-size: 14px;
   }
 }

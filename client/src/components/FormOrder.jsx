@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { createOrder } from "../utils/orderAPI";
 
 const FormOrder = ({ onOrderSubmit }) => {
@@ -7,6 +8,27 @@ const FormOrder = ({ onOrderSubmit }) => {
   const [name, setName] = useState("");
   const [telephone, setTelephone] = useState("");
   const [address, setAddress] = useState("");
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    const token = localStorage.getItem("token");
+    axios
+      .get("http://localhost:5000/api/auth/profile", {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        setName(response.data.name);
+        console.log(response.data.name);
+      })
+      .catch((error) => {
+        console.error("Gagal mengambil informasi pengguna:", error);
+      });
+  };
 
   const handleOrderSubmit = async (e) => {
     e.preventDefault();
@@ -72,9 +94,8 @@ const FormOrder = ({ onOrderSubmit }) => {
             id="name"
             className="form-control"
             name="name"
-            required
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            disabled
           />
           <br />
 
