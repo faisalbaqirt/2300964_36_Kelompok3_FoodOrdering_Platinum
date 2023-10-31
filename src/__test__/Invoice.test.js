@@ -42,7 +42,14 @@ test("renders the Invoice component and handles download", async () => {
     expect(html2canvas).toHaveBeenCalled();
   });
 
-  expect(jsPDF).toHaveBeenCalled();
-  expect(jsPDF().addImage).toHaveBeenCalled();
-  expect(jsPDF().save).toHaveBeenCalled();
+  // Tunggu untuk memastikan bahwa jsPDF telah selesai dipanggil
+  await waitFor(() => {
+    expect(jsPDF).toHaveBeenCalled();
+  });
+  await waitFor(() => {
+    expect(jsPDF().addImage).toHaveBeenCalled();
+  });
+  await waitFor(() => {
+    expect(jsPDF().save).toHaveBeenCalled();
+  });
 });
