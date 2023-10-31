@@ -3,7 +3,7 @@ import jsPDF from "jspdf";
 
 export function downloadPDF(ref, filename) {
   const input = ref.current;
-  html2canvas.default(input).then((canvas) => {
+  html2canvas(input).then((canvas) => {
     const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF("p", "mm", "a4", true);
     const pdfWidth = pdf.internal.pageSize.getWidth();

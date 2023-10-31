@@ -39,7 +39,7 @@ test("renders the Invoice component and handles download", async () => {
 
   // Tunggu hingga downloadPDF selesai
   await waitFor(() => {
-    expect(html2canvas.default).toHaveBeenCalled();
+    expect(html2canvas).toHaveBeenCalled();
   });
 
   expect(jsPDF).toHaveBeenCalled();
