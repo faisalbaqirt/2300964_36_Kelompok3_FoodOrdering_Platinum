@@ -1,0 +1,9 @@
+.docs-container {
+    min-height: 100vh;
+}
+.docs-page #navigation {
+    background-color: #262626;
+}
+.docs-title {
+    margin-top: 50px;
+}

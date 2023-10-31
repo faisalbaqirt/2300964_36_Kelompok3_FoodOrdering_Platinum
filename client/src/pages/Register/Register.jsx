@@ -1,11 +1,10 @@
 import Contact from "../../components/Contact";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-import Scrollspy from "../../utils/Scrollspy";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../utils/userAPI";
 import "./register.css";
-import axios from "axios";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -27,26 +26,16 @@ function Register() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        formData
-      );
+      const response = await registerUser(formData);
       if (response.status === 201) {
         navigate("/login");
       } else {
-        console.error(response.data.message);
+        console.error("error");
       }
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   };
-
-  useEffect(() => {
-    const scrollspy = Scrollspy();
-    return () => {
-      scrollspy.dispose();
-    };
-  }, []);
 
   return (
     <div className="register">

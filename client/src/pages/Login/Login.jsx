@@ -1,9 +1,8 @@
 import Contact from "../../components/Contact";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-import Scrollspy from "../../utils/Scrollspy";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
+import { login } from "../../utils/userAPI";
 import "./login.css";
 
 function Login() {
@@ -11,7 +10,6 @@ function Login() {
     username: "",
     password: "",
   });
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,28 +22,19 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
-      );
-      console.log(response.data);
-      console.log(response.data.accessToken);
+      const response = await login(formData);
+
       if (response.status === 200 && response.data.accessToken) {
         localStorage.setItem("token", response.data.accessToken);
         localStorage.setItem("role", response.data.role);
         window.location.href = "/login";
+      } else {
+        alert("Masukkan data yang benar!");
       }
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   };
-
-  useEffect(() => {
-    const scrollspy = Scrollspy();
-    return () => {
-      scrollspy.dispose();
-    };
-  }, []);
 
   return (
     <div className="login">

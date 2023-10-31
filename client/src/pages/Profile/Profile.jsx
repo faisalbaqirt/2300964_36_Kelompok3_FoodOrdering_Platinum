@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { getUserProfile, editProfile } from "../../utils/userAPI";
 import Contact from "../../components/Contact";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
@@ -21,24 +21,17 @@ const Profile = () => {
   });
 
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
 
-  const fetchData = () => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:5000/api/auth/profile", {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((response) => {
-        setUser(response.data);
-      })
-      .catch((error) => {
-        console.error("Gagal mengambil informasi pengguna:", error);
-      });
-  }
+  const fetchData = async () => {
+    try {
+      const response = await getUserProfile();
+      setUser(response);
+    } catch (error) {
+      console.error("Gagal mengambil data user", error);
+    }
+  };
 
   const handleEditProfile = (user) => {
     setShowModal(true);
@@ -54,7 +47,6 @@ const Profile = () => {
 
   const handleSaveProfile = async () => {
     setIsLoading(true);
-    const token = localStorage.getItem("token");
     const { id, username, email, name, password, photo } = editedUser;
 
     const formData = new FormData();
@@ -65,16 +57,11 @@ const Profile = () => {
     formData.append("photo", photo);
 
     // Kirim permintaan ke server untuk mengedit profil
-    await axios.put(`http://localhost:5000/api/auth/profile/${id}`, formData, {
-      headers: {
-        Authorization: token,
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    await editProfile(id, formData);
 
     setIsLoading(false);
     setShowModal(false);
-    fetchData()
+    fetchData();
   };
 
   const handleCancelProfile = () => {
@@ -100,7 +87,7 @@ const Profile = () => {
         )}
         <div className="profile">
           <div className="section-title profile-title text-center">
-            <h2>Invoice</h2>
+            <h2>Profile</h2>
           </div>
           <div className="user-info">
             <div className="info-header">

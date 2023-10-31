@@ -35,7 +35,9 @@ const AdminSidebar = ({ routes }) => {
               </a>
               {routes.map((prop, key) => (
                 <li
-                  className={`nav-item mt-3 ${activeRoute(prop.layout + prop.path)}`}
+                  className={`nav-item mt-3 ${activeRoute(
+                    prop.layout + prop.path
+                  )}`}
                   key={key}
                 >
                   <a
@@ -54,9 +56,7 @@ const AdminSidebar = ({ routes }) => {
             </ul>
           </div>
         </div>
-
-       
-           <div className="sidebar-footer">
+        <div className="sidebar-footer">
           <div className="dropdown">
             <button
               className="btn drop-btn text-light fs-5"

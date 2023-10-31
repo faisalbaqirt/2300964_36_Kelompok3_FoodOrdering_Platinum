@@ -1,7 +1,15 @@
 //fetch API product
-import axios from 'axios';
+import axios from "axios";
 
-const API_PRODUCT_URL = "http://localhost:5000/api/products";
+let API_PRODUCT_URL;
+
+if (process.env.NODE_ENV === "development") {
+  // url local
+  API_PRODUCT_URL = "http://localhost:5000/api/products";
+} else {
+  // url production
+  API_PRODUCT_URL = process.env.REACT_APP_API_URL + "/api/products";
+}
 
 // mengambil semua product
 export const getAllProducts = async () => {
@@ -25,26 +33,30 @@ export const getProductById = async (productId) => {
 
 // membuat product
 export const createProduct = async (formData) => {
-    try {
-      const response = await axios.post(API_PRODUCT_URL, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  };
-  
-// mengupdate product berdasarkan ID
-export const updateProduct = async (productId, formData) => {
   try {
-    const response = await axios.put(`${API_PRODUCT_URL}/${productId}`, formData, {
+    const response = await axios.post(API_PRODUCT_URL, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// mengupdate product berdasarkan ID
+export const updateProduct = async (productId, formData) => {
+  try {
+    const response = await axios.put(
+      `${API_PRODUCT_URL}/${productId}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     throw error;
@@ -60,6 +72,3 @@ export const deleteProduct = async (productId) => {
     throw error;
   }
 };
-
-
-

@@ -9,7 +9,7 @@ import {
 function AdminProducts() {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
-  const [isEditing, setIsEditing] = useState(false); // Status apakah sedang dalam mode edit
+  const [isEditing, setIsEditing] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [editedProduct, setEditedProduct] = useState({
     id: null,
@@ -27,7 +27,6 @@ function AdminProducts() {
     try {
       const productsData = await getAllProducts();
       setProducts(productsData.data);
-      console.log("Data dari API:", productsData.data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }

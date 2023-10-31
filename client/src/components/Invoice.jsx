@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { getOrderById } from "../utils/orderAPI";
-import { capitalize } from "lodash";
 import { downloadPDF } from "../utils/downloadPDF";
 
 function Invoice({ orderId, onBackToOrder }) {
@@ -50,8 +49,8 @@ function Invoice({ orderId, onBackToOrder }) {
           <div className="right-column">
             <div>
               <p>Kepada:</p>
-              <p>{capitalize(invoiceData?.name)}</p>
-              <p>{capitalize(invoiceData?.address)}</p>
+              <p>{invoiceData?.name}</p>
+              <p>{invoiceData?.address}</p>
             </div>
           </div>
         </div>
@@ -62,20 +61,22 @@ function Invoice({ orderId, onBackToOrder }) {
                 <th>Nama Produk</th>
                 <th className="text-center">Harga</th>
                 <th className="text-center">Jumlah</th>
-                <th style={{textAlign:"right"}}>Total</th>
+                <th style={{ textAlign: "right" }}>Total</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{capitalize(invoiceData?.product_name)}</td>
+                <td>{invoiceData?.product_name}</td>
                 <td className="text-center">
                   {price.toLocaleString("id-ID", {
                     style: "currency",
                     currency: "IDR",
                   })}
                 </td>
-                <td className="text-center">{Math.floor(invoiceData?.quantity)}</td>
-                <td style={{textAlign:"right"}}>
+                <td className="text-center">
+                  {Math.floor(invoiceData?.quantity)}
+                </td>
+                <td style={{ textAlign: "right" }}>
                   {Math.floor(invoiceData?.total_amount).toLocaleString(
                     "id-ID",
                     {
@@ -89,14 +90,16 @@ function Invoice({ orderId, onBackToOrder }) {
             <tfoot>
               <tr>
                 <th colSpan="3">Total Pembayaran</th>
-                <td style={{textAlign:"right"}}><strong>
-                  {Math.floor(invoiceData?.total_amount).toLocaleString(
-                    "id-ID",
-                    {
-                      style: "currency",
-                      currency: "IDR",
-                    }
-                  )}</strong>
+                <td style={{ textAlign: "right" }}>
+                  <strong>
+                    {Math.floor(invoiceData?.total_amount).toLocaleString(
+                      "id-ID",
+                      {
+                        style: "currency",
+                        currency: "IDR",
+                      }
+                    )}
+                  </strong>
                 </td>
               </tr>
             </tfoot>

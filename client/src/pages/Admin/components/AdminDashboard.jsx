@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { getDashboardData, getOrdersChart, getSalesChart } from "../../../utils/adminAPI";
+import {
+  getDashboardData,
+  getOrdersChart,
+  getSalesChart,
+} from "../../../utils/adminAPI";
 import { Line, Bar } from "react-chartjs-2";
 
 const AdminDashboard = () => {
@@ -17,7 +21,7 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const dashboardResponse = await getDashboardData()
+      const dashboardResponse = await getDashboardData();
       setDashboardData(dashboardResponse);
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
@@ -38,10 +42,10 @@ const AdminDashboard = () => {
         const year = sixMonthsAgo.getFullYear();
         const month = sixMonthsAgo.getMonth() + 1;
 
-        const orderResponse = await getOrdersChart(year, month)
+        const orderResponse = await getOrdersChart(year, month);
         const ordersData = orderResponse.length;
-      
-        const salesResponse = await getSalesChart(year, month)
+
+        const salesResponse = await getSalesChart(year, month);
         const salesData = salesResponse.total_sales;
 
         months.push(
@@ -76,10 +80,7 @@ const AdminDashboard = () => {
     "Total Orders per Month",
     chartData.orders
   );
-  const chartSalesData = createChart(
-    "Total Sales per Month",
-    chartData.sales
-  );
+  const chartSalesData = createChart("Total Sales per Month", chartData.sales);
 
   return (
     <>

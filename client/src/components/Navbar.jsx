@@ -65,6 +65,11 @@ function Navbar() {
                 </a>
               </li>
               <li className="nav-item">
+                <a className="nav-link" href="/docs">
+                  Docs
+                </a>
+              </li>
+              <li className="nav-item">
                 <a
                   className="nav-link"
                   href={isHomePage ? "#products" : "/#products"}

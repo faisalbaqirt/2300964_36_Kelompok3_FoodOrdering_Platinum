@@ -6,7 +6,7 @@
     "description": "Food Ordering adalah hasil platinum challenge dari kelompok 3 FSW 36 Binar Academy. Selamat datang di API Food Ordering Ayam Geprek Mang Iyok, pintu gerbang Anda ke dunia pemesanan ayam geprek yang lezat. API ini menyediakan beragam titik akhir (end point) untuk mengelola produk dan pesanan. Anda dapat menjelajahi menu, melakukan pemesanan, dan mengelola pesanan makanan Anda dengan mudah. Baik Anda seorang pelanggan atau administrator, API ini telah siap melayani Anda. Silakan merujuk ke deskripsi titik akhir spesifik untuk petunjuk penggunaan yang lebih detail."
   },
   "schemes": [
-    "https"
+    "http"
   ],
   "basePath": "/api",
   "securityDefinitions": {
@@ -117,6 +117,10 @@
                   "type": "string",
                   "example": "budi"
                 },
+                "role": {
+                  "type": "string",
+                  "example": "user"
+                },
                 "accessToken": {
                   "type": "string",
                   "example": "your-access-token"
@@ -125,6 +129,122 @@
             }
           }
         }
+      }
+    },
+    "/auth/users": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Get all users",
+        "description": "Retrieve a list of all available users.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/auth/users/{id}": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Get a user by ID",
+        "description": "Retrieve a user by its ID.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/products": {
@@ -165,6 +285,9 @@
                         "type": "string"
                       },
                       "price": {
+                        "type": "number"
+                      },
+                      "image": {
                         "type": "string"
                       }
                     }
@@ -187,30 +310,31 @@
         "summary": "Create a new product",
         "description": "Create a new product.",
         "consumes": [
-          "application/json"
+          "multipart/form-data"
         ],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "body",
-            "name": "product",
-            "description": "Product data",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "string"
-                }
-              }
-            }
+            "in": "formData",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "price",
+            "type": "number"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "type": "file"
           }
         ],
         "responses": {
@@ -275,13 +399,20 @@
                       "example": 1
                     },
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "example": "Paket Ayam Geprek"
                     },
                     "description": {
-                      "type": "string"
+                      "type": "string",
+                      "example": "ayam geprek beserta nasi"
                     },
                     "price": {
-                      "type": "string"
+                      "type": "number",
+                      "example": "15000"
+                    },
+                    "image": {
+                      "type": "string",
+                      "example": "image-url"
                     }
                   }
                 }
@@ -302,7 +433,7 @@
         "summary": "Update a product by ID",
         "description": "Update an existing product by its ID.",
         "consumes": [
-          "application/json"
+          "multipart/form-data"
         ],
         "produces": [
           "application/json"
@@ -316,23 +447,24 @@
             "type": "integer"
           },
           {
-            "in": "body",
-            "name": "product",
-            "description": "Product data",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "string"
-                }
-              }
-            }
+            "in": "formData",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "price",
+            "type": "number"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "type": "file"
           }
         ],
         "responses": {

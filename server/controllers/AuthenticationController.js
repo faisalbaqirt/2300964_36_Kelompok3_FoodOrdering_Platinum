@@ -107,15 +107,106 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const getAllUsersData = async (req, res) => {
+  try {
+    const data = await userModel.getAllUsers();
+    const filteredData = data.map((user) => ({
+      id: user.id,
+      username: user.username,
+      name: user.name,
+      role: user.role,
+    }));
+
+    res.status(200).json({ status: 200, data: filteredData });
+  } catch (error) {
+    res.status(500).json({ status: 500, message: error.message });
+  }
+};
+
 const getUserById = async (req, res) => {
   try {
     const data = await userModel.getUserById(req.params.id);
     if (!data) {
-      res.json({ status: 404, message: "Produk tidak ditemukan!" });
+      return res
+        .status(404)
+        .json({ status: 404, message: "User tidak ditemukan!" });
     }
-    res.status(200).json({ status: 200, data });
+
+    const filteredData = {
+      id: data.id,
+      username: data.username,
+      name: data.name,
+      role: data.role,
+    };
+
+    res.status(200).json({ status: 200, data: filteredData });
   } catch (error) {
     res.status(500).json({ status: 500, message: error.message });
+  }
+};
+
+const createUserByAdmin = async (req, res) => {
+  try {
+    const { username, email, name, password, role } = req.body;
+    const photo = req.file.path;
+
+    const encryptedPassword = bcrypt.hashSync(password.toString(), 10);
+
+    // upload gambar ke Cloudinary ke dalam folder 'users'
+    const folderName = "users";
+    const photoURL = await cloudinaryService.uploadCloudinary(
+      photo,
+      folderName
+    );
+
+    fs.unlinkSync(photo);
+
+    await userModel.createUserByAdmin(
+      username,
+      email,
+      name,
+      encryptedPassword,
+      photoURL,
+      role
+    );
+
+    res.status(201).json({ message: "Berhasil menambahkan user" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Terjadi kesalahan saat menambahkan user" });
+  }
+};
+
+const updateUserByAdmin = async (req, res) => {
+  try {
+    const { username, email, name, password, role } = req.body;
+    const photo = req.file.path;
+
+    const encryptedPassword = bcrypt.hashSync(password.toString(), 10);
+
+    // upload gambar ke Cloudinary ke dalam folder 'users'
+    const folderName = "users";
+    const photoURL = await cloudinaryService.uploadCloudinary(
+      photo,
+      folderName
+    );
+
+    fs.unlinkSync(photo);
+
+    await userModel.updateUserByAdmin(
+      req.params.id,
+      username,
+      email,
+      name,
+      encryptedPassword,
+      photoURL,
+      role
+    );
+
+    res.status(201).json({ message: "Profil berhasil diperbarui" });
+  } catch (error) {
+    res.status(500).json({ message: "Terjadi kesalahan saat mengedit profil" });
   }
 };
 
@@ -134,6 +225,9 @@ module.exports = {
   profile,
   editProfile,
   getAllUsers,
+  getAllUsersData,
   getUserById,
+  createUserByAdmin,
+  updateUserByAdmin,
   deleteUser,
 };

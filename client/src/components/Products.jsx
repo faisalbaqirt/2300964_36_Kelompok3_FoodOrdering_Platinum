@@ -12,7 +12,6 @@ function Products() {
     try {
       const productsData = await getAllProducts();
       setProducts(productsData.data);
-      console.log("Data dari API:", productsData.data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -26,20 +25,22 @@ function Products() {
             <div className="col-md-4 col-sm-12" key={product.id}>
               <div className="card">
                 <div className="card-header">
-                <img
-                  src={product.image}
-                  className="card-img-top"
-                  alt={product.name}
-                />
+                  <img
+                    src={product.image}
+                    className="card-img-top"
+                    alt={product.name}
+                  />
                 </div>
                 <div className="card-body text-uppercase">
                   <h3 className="card-title">{product.name}</h3>
                   <p className="card-text">{product.description}</p>
-                  <p className="card-price">Harga:{" "}
+                  <p className="card-price">
+                    Harga:{" "}
                     {Math.floor(product.price).toLocaleString("id-ID", {
                       style: "currency",
                       currency: "IDR",
-                    })}</p>
+                    })}
+                  </p>
                 </div>
               </div>
             </div>

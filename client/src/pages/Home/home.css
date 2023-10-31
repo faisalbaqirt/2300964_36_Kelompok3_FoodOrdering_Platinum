@@ -2,11 +2,13 @@
 #products {
   padding: 50px 0;
 }
+
 #products h2 {
   text-align: center;
 }
+
 .card {
-  background-color: #333;
+  background-color: #fff;
   border: none;
   margin: 0 auto;
   width: 100%;
@@ -15,49 +17,59 @@
   transition: transform 0.3s ease-in-out;
   box-shadow: 0 -1px 30px 1px black;
 }
+
 .card:hover {
   transform: scale(1.05);
 }
+
 .card-header {
-  background-color: white;
+  background-color: #fff;
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
+
 .card-img-top {
   padding: 10px 0;
   width: 100%;
   max-height: 200px;
 }
+
 .card-body {
   padding: 20px;
   min-height: 220px;
   text-align: center;
   display: flex;
   flex-direction: column;
+  background-color: #333;
+  width: 100%;
 }
+
 .card-title {
   color: #aaa;
   text-align: center;
 }
+
 .card-text {
   padding-top: 15px;
   margin-bottom: auto;
 }
 
 /* Layar Tablet, PC ++ */
-@media (min-width: 769px) {
-}
+@media (min-width: 769px) {}
+
 /* Layar HP */
 @media (max-width: 768px) {
   .card {
     margin: 20px auto;
   }
 }
+
 .order-link {
   margin: 0 auto;
   margin-top: 60px;
 }
+
 #order-here {
   background-color: #fff;
   color: #333;
@@ -71,6 +83,7 @@
   cursor: pointer;
   align-items: center;
 }
+
 #order-here:hover {
   color: #d43031;
   border: 2px solid #d43031;

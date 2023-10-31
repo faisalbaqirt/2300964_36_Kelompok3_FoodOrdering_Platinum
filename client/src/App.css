@@ -114,7 +114,7 @@ ul {
   display: table;
   width: 100%;
   padding: 0;
-  background: url(../public/bgayamgeprek.jpg) center center no-repeat;
+  background: url("https://res.cloudinary.com/dg1vhnf5g/image/upload/v1698624751/products/bgayamgeprek_scdphw.jpg") center center no-repeat;
   background-size: cover;
 }
 

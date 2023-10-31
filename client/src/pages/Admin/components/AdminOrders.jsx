@@ -26,8 +26,6 @@ const AdminOrders = () => {
       const sortedOrders = ordersData.data.sort((a, b) => a.id - b.id);
 
       setOrders(sortedOrders);
-
-      console.log("Data from API:", ordersData.data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -61,6 +59,7 @@ const AdminOrders = () => {
       const response = await createOrder(orderData);
       console.log(response.order_id.id);
 
+      alert("Berhasil membuat pesanan")
       setShowOrderForm(false);
       fetchOrders();
     } catch (error) {
@@ -89,20 +88,18 @@ const AdminOrders = () => {
       await updateOrderStatus(orderId, {
         newStatus: updatedStatus.find((order) => order.id === orderId).status,
       });
-
-      console.log("Status pesanan berhasil diubah");
+      alert("Customer sudah mengkonfirmasi pembayaran, segera proses pesanan!")
     } catch (error) {
       console.error("Terjadi kesalahan saat mengubah status pesanan:", error);
     }
   };
 
   const handleDeleteSelectedOrders = async () => {
-    console.log("Pesanan yang dipilih:", selectedOrders);
     try {
       // permintaan HTTP untuk menghapus pesanan dari database
       await Promise.all(selectedOrders.map((orderId) => deleteOrder(orderId)));
 
-      console.log("Pesanan yang dipilih berhasil dihapus");
+      alert("Pesanan yang dipilih berhasil dihapus");
     } catch (error) {
       console.error("Terjadi kesalahan saat menghapus pesanan:", error);
     }
@@ -226,7 +223,7 @@ const AdminOrders = () => {
                 </div>
                 <div className="modal-body">
                   <form>
-                    <label for="product_name">Nama Produk:</label>
+                    <label htmlFor="product_name">Nama Produk:</label>
                     <select
                       id="product_name"
                       className="form-control"
@@ -242,7 +239,7 @@ const AdminOrders = () => {
                     </select>
                     <br />
 
-                    <label for="quantity">Jumlah:</label>
+                    <label htmlFor="quantity">Jumlah:</label>
                     <input
                       type="number"
                       id="quantity"
@@ -254,7 +251,7 @@ const AdminOrders = () => {
                     />
                     <br />
 
-                    <label for="name">Nama Pemesan:</label>
+                    <label htmlFor="name">Nama Pemesan:</label>
                     <input
                       type="text"
                       id="name"
@@ -266,7 +263,7 @@ const AdminOrders = () => {
                     />
                     <br />
 
-                    <label for="telephone">Telepon:</label>
+                    <label htmlFor="telephone">Telepon:</label>
                     <input
                       type="text"
                       id="telephone"
@@ -278,7 +275,7 @@ const AdminOrders = () => {
                     />
                     <br />
 
-                    <label for="address">Alamat:</label>
+                    <label htmlFor="address">Alamat:</label>
                     <input
                       type="text"
                       id="address"

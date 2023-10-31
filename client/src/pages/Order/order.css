@@ -54,6 +54,7 @@
 }
 #invoice p, #invoice h2, .invoice-table td{
 	color:#333;
+	text-transform: capitalize;
 }
 .invoice-head {
 	display: flex;

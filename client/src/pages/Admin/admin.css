@@ -16,7 +16,8 @@
     background-color: #333;
 }
 
-.content-title h2, .admin-content h3 {
+.content-title h2,
+.admin-content h3 {
     color: #fff !important;
 }
 
@@ -44,16 +45,15 @@
         position: fixed;
         bottom: 20px;
     }
+
     .sidebar-footer .dropdown-menu {
         transform: translateY(-160%);
     }
-
 
     .admin-content {
         padding: 40px;
         margin-left: 220px;
     }
-
 
     .select-visible {
         padding: 10px 40px 0 240px;
@@ -82,9 +82,11 @@
         padding: 10px;
         z-index: 9995;
     }
+
     #sidebar {
         width: 100%;
     }
+
     .admin-content {
         margin-top: 50px;
     }
@@ -109,8 +111,6 @@
 .navbar-brand {
     text-align: center;
 }
-
-
 
 .admin-sidebar ul>li>.nav-link {
     text-transform: uppercase;
@@ -152,19 +152,23 @@
     padding: 20px;
     overflow-x: scroll;
 }
+
 .admin-table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
 }
+
 .table-container .admin-table th,
 td {
     vertical-align: middle;
 }
+
 #orderlist .table-container .admin-table th,
 td {
     text-transform: capitalize;
 }
+
 .table-container .admin-table td {
     font-size: small;
 }
@@ -194,6 +198,7 @@ td {
     flex-direction: column;
     justify-content: space-between;
 }
+
 .admin-product-dropdown {
     display: none;
 }
@@ -272,29 +277,34 @@ td {
     background-color: white;
     z-index: 9997;
 }
+
 /* dashboard */
 .dashboard {
     margin-top: 20px;
 }
+
 .dashboard-row {
     justify-content: space-between;
     margin: 10px auto;
 }
+
 .dashboard-card {
     margin: 10px auto;
     padding: 10px;
     border: none;
     border-radius: 10px;
 }
+
 .dashboard-item {
-   border: 1px solid wheat;
-   border-radius: 10px;
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   justify-content: space-between;
-   padding: 10px;
+    border: 1px solid wheat;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
 }
+
 .icon-dash {
     background-color: #ccc;
     display: inline-flex;
@@ -307,24 +317,28 @@ td {
     overflow: hidden;
     position: relative;
 }
+
 .chart-row {
     justify-content: space-between;
     margin: 10px auto;
 }
+
 .chart-card {
     margin: 10px auto;
 }
+
 .chart-title {
     padding: 10px;
     border-radius: 10px 10px 0 0;
 }
+
 .chart-body {
     background-color: #fff;
     padding: 20px;
     border-radius: 0 0 10px 10px;
 }
 
- /* profile  */
+/* profile  */
 .avatar img {
     width: 100%;
     height: 100%;
@@ -334,6 +348,7 @@ td {
     left: 0;
     border-radius: 50%;
 }
+
 .avatar {
     background-color: black;
     display: inline-flex;
@@ -346,5 +361,3 @@ td {
     overflow: hidden;
     position: relative;
 }
-
-

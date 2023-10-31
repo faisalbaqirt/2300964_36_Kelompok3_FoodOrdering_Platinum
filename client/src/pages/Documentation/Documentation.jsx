@@ -1,12 +1,20 @@
-import React from 'react';
-import APIDocumentation from '../../components/APIDocumentation';
+import React from "react";
+import Navbar from "../../components/Navbar";
+import APIDocumentation from "../../components/APIDocumentation";
+import Contact from "../../components/Contact";
+import Footer from "../../components/Footer";
+import "./docs.css";
 
 const APIDocsPage = () => {
   return (
-    <div>
-      <h1>API Documentation</h1>
-      <APIDocumentation />
-    </div>
+    <>
+      <div className="docs-page">
+        <Navbar />
+        <APIDocumentation />
+        <Contact />
+        <Footer />
+      </div>
+    </>
   );
 };
 

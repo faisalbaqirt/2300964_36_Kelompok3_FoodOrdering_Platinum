@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { createOrder } from "../utils/orderAPI";
+import { getUserProfile } from "../utils/userAPI";
 
 const FormOrder = ({ onOrderSubmit }) => {
   const [product_name, setProductName] = useState("paket ayam geprek");
@@ -13,21 +13,13 @@ const FormOrder = ({ onOrderSubmit }) => {
     fetchData();
   }, []);
 
-  const fetchData = () => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:5000/api/auth/profile", {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((response) => {
-        setName(response.data.name);
-        console.log(response.data.name);
-      })
-      .catch((error) => {
-        console.error("Gagal mengambil informasi pengguna:", error);
-      });
+  const fetchData = async () => {
+    try {
+      const response = await getUserProfile();
+      setName(response.name);
+    } catch (error) {
+      console.error("Gagal mengambil data user", error);
+    }
   };
 
   const handleOrderSubmit = async (e) => {
@@ -44,7 +36,6 @@ const FormOrder = ({ onOrderSubmit }) => {
 
       const response = await createOrder(orderData);
 
-      console.log(response);
       if (response && response.order_id.id) {
         onOrderSubmit(response.order_id.id);
       } else {
