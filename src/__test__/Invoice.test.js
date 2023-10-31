@@ -5,6 +5,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 jest.mock("html2canvas", () => ({
+  __esModule: true,
   default: jest.fn(() =>
     Promise.resolve({
       toDataURL: jest.fn(),
@@ -15,10 +16,9 @@ jest.mock("html2canvas", () => ({
 }));
 
 jest.mock("jspdf", () => {
-  const mockSave = jest.fn();
   return jest.fn(() => ({
     addImage: jest.fn(),
-    save: mockSave,
+    save: jest.fn()
   }));
 });
 
