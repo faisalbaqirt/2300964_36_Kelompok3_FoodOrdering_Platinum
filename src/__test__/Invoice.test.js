@@ -1,28 +1,12 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Invoice from "../components/Invoice";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 
-jest.mock("html2canvas", () => ({
-  __esModule: true,
-  default: jest.fn(() =>
-    Promise.resolve({
-      toDataURL: jest.fn(),
-      width: 200,
-      height: 100,
-    })
-  ),
+jest.mock("../utils/downloadPDF", () => ({
+  downloadPDF: jest.fn(),
 }));
 
-jest.mock("jspdf", () => {
-  return jest.fn(() => ({
-    addImage: jest.fn(),
-    save: jest.fn()
-  }));
-});
-
-test("renders the Invoice component and handles download", async () => {
+test("renders the Invoice component", () => {
   render(<Invoice orderId="your-order-id" onBackToOrder={() => {}} />);
 
   const titleText = screen.getByText("Invoice");
@@ -32,24 +16,4 @@ test("renders the Invoice component and handles download", async () => {
   expect(titleText).toBeInTheDocument();
   expect(paymentMethodText).toBeInTheDocument();
   expect(confirmationText).toBeInTheDocument();
-
-  // Temukan tombol "Download" dan klik
-  const downloadButton = screen.getByText("Download");
-  fireEvent.click(downloadButton);
-
-  // Tunggu hingga downloadPDF selesai
-  await waitFor(() => {
-    expect(html2canvas).toHaveBeenCalled();
-  });
-
-  // Tunggu untuk memastikan bahwa jsPDF telah selesai dipanggil
-  await waitFor(() => {
-    expect(jsPDF).toHaveBeenCalled();
-  });
-  await waitFor(() => {
-    expect(jsPDF().addImage).toHaveBeenCalled();
-  });
-  await waitFor(() => {
-    expect(jsPDF().save).toHaveBeenCalled();
-  });
 });

@@ -86,7 +86,7 @@ const FormOrder = ({ onOrderSubmit }) => {
             className="form-control"
             name="name"
             value={name}
-            disabled
+            onChange={(e) => setName(e.target.value)}
           />
           <br />
 
